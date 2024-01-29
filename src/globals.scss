@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap');
+
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --max-width: 1100px;
+  --general-padding: 120px;
+  --margin-top: 20px;
+  --shadow-box: 0 0 10px 2px rgb(167, 167, 167);
+  --font-mono: "Merriweather Sans", sans-serif, ui-monospace, Menlo, Monaco,
+    "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono",
+    "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono",
+    "Courier New", monospace;
+
+  --PrimaryBackgroundColor: black;
+  --background-signIn: rgb(0, 0, 0);
+  --text-primary-color: white;
+
+  --NavbarBackgroundColor: rgb(19, 19, 19);
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  font-family: var(--font-mono);
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul{
+  margin: 0;
+}
+li {
+  list-style: none;
+}
+h1,h2,h3,h4{
+  margin: 0;
+}
+button {
+  height: 40px;
+  background-color: rgb(167, 0, 218);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:active {
+  transform: translateY(3px);
+}
+
+/* Estilo para la barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 6px; /* Ancho de la barra de desplazamiento */
+}
+
+/* Estilo para el "track" de la barra de desplazamiento (la parte gris) */
+::-webkit-scrollbar-track {
+  background-color: #000000; /* Color de fondo del track */
+}
+
+/* Estilo para el "thumb" de la barra de desplazamiento (la parte desplazable) */
+::-webkit-scrollbar-thumb {
+  background-color: #a3a3a3; /* Color del thumb */
+  border-radius: 8px; /* Bordes redondeados del thumb */
+  width: 4px;
+}
+
+/* Cambia el color del thumb al pasar el ratón sobre él */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

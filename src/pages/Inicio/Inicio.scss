@@ -1,0 +1,14 @@
+.inicioPage{
+  width: 90%;
+  margin: 30px auto;
+
+  .titlePage{
+    margin: 0 0 20px 0;
+  }
+
+  .cotizacionesList{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}

@@ -1,0 +1,39 @@
+.signInForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  fieldset{
+    width: 100%;
+    max-width: 400px;
+    border: none;
+  }
+  .formTitle{
+    margin: 10px 0;
+  }
+  .formRow{
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .forgotPassword{
+    margin: 10px 0;
+  }
+
+  .formBtn{
+    margin: 10px 0;
+    width: 100%;
+    button{
+    width: 100%;
+
+    }
+  }
+  .formNewUser{
+    margin: 10px 0;
+
+  }
+}
