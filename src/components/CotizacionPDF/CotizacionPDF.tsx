@@ -48,7 +48,7 @@ function CotizacionPDF({ data }: any) {
       fontSize: 12,
     },
     table: {
-      marginTop:'30px',
+      marginTop: "20px",
     },
     theader: {},
     tbody: {
@@ -58,32 +58,56 @@ function CotizacionPDF({ data }: any) {
       border: "1px solid black",
       display: "flex",
       flexDirection: "row",
-      justifyContent:"space-evenly"
+      justifyContent: "space-evenly",
     },
     tCantidad: {
-      width: "7%",
+      width: "8%",
     },
     tUnidad: {
       width: "7%",
     },
     tClave: {
-      width: "12%",
+      width: "11%",
     },
     tDescripcion: {
-      width: "35%",
+      width: "36%",
     },
     tUnitario: {
       width: "12%",
     },
     tImporte: {
-      width: "12%",
+      width: "13%",
     },
     tMoneda: {
-      width: "5%",
+      width: "7%",
     },
-
+    theaderText: {
+      fontSize: 10,
+      fontWeight:500,
+    },
     dataText: {
       fontSize: 10,
+    },
+    tfooterText: {
+      fontSize: 10,
+      margin: 3,
+
+    },
+    tfooter: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-end",
+      alignItems: "flex-end",
+      width: "100%",
+    },
+    tfooterRow: {
+      display: "flex",
+      flexDirection: "row",
+    },
+    firma:{
+      display:'flex',
+      flexDirection:'column',
+      marginTop:'40px'
     },
     pageNumber: {
       position: "absolute",
@@ -156,25 +180,25 @@ function CotizacionPDF({ data }: any) {
           <View style={styles.theader}>
             <View style={styles.trow}>
               <View style={styles.tCantidad}>
-                <Text style={styles.dataText}>Cantidad</Text>
+                <Text style={styles.theaderText}>Cantidad</Text>
               </View>
               <View style={styles.tUnidad}>
-                <Text style={styles.dataText}>Unidad</Text>
+                <Text style={styles.theaderText}>Unidad</Text>
               </View>
               <View style={styles.tClave}>
-                <Text style={styles.dataText}>Clave</Text>
+                <Text style={styles.theaderText}>Clave</Text>
               </View>
               <View style={styles.tDescripcion}>
-                <Text style={styles.dataText}>Descripcion</Text>
+                <Text style={styles.theaderText}>Descripcion</Text>
               </View>
               <View style={styles.tUnitario}>
-                <Text style={styles.dataText}>P.Unitario</Text>
+                <Text style={styles.theaderText}>P.Unitario</Text>
               </View>
               <View style={styles.tImporte}>
-                <Text style={styles.dataText}>Importe</Text>
+                <Text style={styles.theaderText}>Importe</Text>
               </View>
               <View style={styles.tMoneda}>
-                <Text style={styles.dataText}>Mon.</Text>
+                <Text style={styles.theaderText}>Mon.</Text>
               </View>
             </View>
           </View>
@@ -278,34 +302,37 @@ function CotizacionPDF({ data }: any) {
                 );
               })}
           </View>
-          <View>
-            <View>
-              <Text>Subtotal</Text>
-              <Text>{setFormat(SubTotal)}</Text>
+          <View style={styles.tfooter}>
+            <View style={styles.tfooterRow}>
+              <Text style={styles.tfooterText}>Subtotal</Text>
+              <Text style={styles.tfooterText}>{setFormat(SubTotal)}</Text>
             </View>
-            <View>
-              <Text>IVA</Text>
-              <Text>{setFormat(iva)}</Text>
+            <View style={styles.tfooterRow}>
+              <Text style={styles.tfooterText}>IVA</Text>
+              <Text style={styles.tfooterText}>{setFormat(iva)}</Text>
             </View>
-            <View>
-              <Text>Subtotal</Text>
-              <Text>{setFormat(TotalObra)}</Text>
+            <View style={styles.tfooterRow}>
+              <Text style={styles.tfooterText}>Subtotal</Text>
+              <Text style={styles.tfooterText}>{setFormat(TotalObra)}</Text>
             </View>
           </View>
         </View>
         <View>
-          <View>
-            <Text>Notas:</Text>
-            <Text>Se requiere un anticipo del 50%, el resto en estimaciones contra entrega</Text>
-
+          <View fixed>
+            <Text style={styles.dataText}>Notas:</Text>
+            <Text style={styles.dataText}>
+              Se requiere un anticipo del 50%, el resto en estimaciones contra
+              entrega
+            </Text>
           </View>
         </View>
 
-        <View >
+        <View fixed style={styles.firma}>
           <View>
-            <Text>_______________________________________</Text>
-            <Text>AGENTE SUPERVISOR</Text>
-
+            <Text style={styles.dataText}>
+              _______________________________________
+            </Text>
+            <Text style={styles.dataText}>AGENTE SUPERVISOR</Text>
           </View>
         </View>
 
