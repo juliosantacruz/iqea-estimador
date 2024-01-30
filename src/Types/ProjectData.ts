@@ -20,3 +20,10 @@ export type PriceValue = {
 //   wasteWaterCotizacion?: PriceValue[];
 //   reusoCotizacion?: PriceValue[];
 // };
+
+export interface TypeCotizacion {
+  projectData?: ProjectData;
+  waterCotizacion?: PriceValue[];
+  wasteWaterCotizacion?: PriceValue[]|[];
+  reusoCotizacion?: PriceValue[]|[];
+}
