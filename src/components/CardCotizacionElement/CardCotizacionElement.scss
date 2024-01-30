@@ -15,6 +15,15 @@
 
     .listHeader {
       display: flex;
+      flex-direction: column;
+      margin-bottom: 5px;
+      .date{
+        font-size: 12px;
+        span{
+          font-size: 16px;
+          margin-left: 8px;
+        }
+      }
     }
 
     .listFooter p {
@@ -65,7 +74,7 @@
     gap: 30px;
     padding: 20px;
     .listContent {
-      gap: 15px;
+      gap: 0;
 
       ul {
         gap: 12px;

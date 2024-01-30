@@ -35,7 +35,10 @@ export default function CardCotizacionElement({ data }: CardProps) {
     <article className="listElement">
       <div className="listContent">
         <div className="listHeader">
-          <h3>{projectData?.name}</h3>
+          <h3>{projectData?.name.toUpperCase()}</h3>
+          <p className="date">Fecha de creacion: {' '} <span>12-02-2024</span> </p>
+          <p className="date">Ubicacion de proyecto: {" "}<span>Sonora</span> </p>
+
         </div>
         <div className="listFooter">
           <p>Sistemas Cotizados:</p>
