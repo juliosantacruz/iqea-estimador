@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useCotizacionStore } from "../../store/cotizacionStore";
-import { TypeCotizacion } from "../../Types/ProjectData";
+import { PriceValue, ProjectData, TypeCotizacion } from "../../Types/ProjectData";
 
 // import React, { useState } from "react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
@@ -8,8 +8,8 @@ import iqeaLogo from "../../assets/iqea_logo.png";
 import { setFormat } from "../../utils/CurrencyFormat";
 import "./Cotizacion.scss";
 import { lazy } from "react";
-
-const CotizacionPDF = lazy(()=> import('../../components/CotizacionPDF/CotizacionPDF'))
+import CotizacionPDF from "../../components/CotizacionPDF/CotizacionPDF";
+// const CotizacionPDF = lazy(()=> import('../../components/CotizacionPDF/CotizacionPDF'))
 
 export default function Cotizacion({ id }: { id: string }) {
   const { cotizaciones } = useCotizacionStore();
@@ -53,7 +53,7 @@ export default function Cotizacion({ id }: { id: string }) {
       <div className="pdfBtn">
         <PDFDownloadLink
           document={<CotizacionPDF data={data} />}
-          fileName="sdftest.pdf"
+          fileName={`Cotizacion_${(projectData as ProjectData).name}.pdf`}
         >
           {({ loading }) =>
             loading ? <button>Cargando...</button> : <button>Descargar</button>
