@@ -1,7 +1,5 @@
-"use client";
 import React, { useState } from "react";
 import "./NewElementBtn.scss";
-// import NewCotizacion from "@/Forms/NewCotizacion/NewCotizacion";
 import CotizacionForm from "../../Forms/CotizacionForm/CotizacionForm";
 
 export default function NewElementBtn() {

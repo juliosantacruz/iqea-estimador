@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { SyntheticEvent, useState } from "react";
 import "./InputField.scss";
 import { useForm } from "react-hook-form";

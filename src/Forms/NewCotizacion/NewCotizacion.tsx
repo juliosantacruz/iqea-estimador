@@ -1,10 +1,11 @@
 "use client";
-import InputField from "@/components/InputField/InputField";
-import React, { useState } from "react";
+import InputField from "../../components/InputField/InputField";
+import  { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./NewCotizacion.scss";
-import InputFieldUnit from "@/components/InputFieldUnit/InputFieldUnit";
+import InputFieldUnit from "../../components/InputFieldUnit/InputFieldUnit";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function NewCotizacion(props: any) {
   const { modal } = props;
 

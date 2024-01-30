@@ -1,12 +1,10 @@
-'use client'
-import React, { useEffect } from 'react'
-import { useUserStore } from '@/store/userStore'
-import { useRouter } from "next/navigation";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import { useUserStore } from '../../store/userStore'
 import './LogOutBtn.scss'
 
 
 export default function LogOutBtn() {
-  const router = useRouter();
 
   const {setIsAuth, setSignout,isAuth}=useUserStore()
   // console.log('not auth',isAuth)
@@ -21,7 +19,6 @@ export default function LogOutBtn() {
   const handleClick=()=>{
     setIsAuth(false)
     setSignout()
-    router.push("/login");
   }
   return (
     <button className='logout' onClick={handleClick}>Cerrar Sesion</button>

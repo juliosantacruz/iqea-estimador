@@ -1,9 +1,9 @@
-"use client";
-import Link from "next/link";
-import React, { FormEvent, useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FormEvent, useState } from "react";
 import "./SignUpForms.scss";
 // import InputComponent from "@/components/InputComponent";
-import { signIn } from "next-auth/react";
 
 export type SignInForm = {
   username: string;
@@ -72,36 +72,6 @@ export default function SignInForm({
       email: formData.email,
       password: formData.password,
     };
-    const jwtToken = await postNewUser(userData, setError, setLoading);
-
-    if (jwtToken.error) {
-      setError(jwtToken.error);
-      setIsRegister(false);
-    }
-
-    setToken(jwtToken);
-    // console.log(jwtToken)
-    await signInSession();
-  };
-
-  const signInSession = async () => {
-    await signIn("credentials", {
-      identifier: formData.username,
-      password: formData.password,
-      redirect: false,
-    })
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
-
-    setLoading(false);
-  };
-
-  const handleChange = (event: any) => {
-    const dato = event?.target.value;
-    setFormData({
-      ...formData,
-      [event.target.name]: dato,
-    });
   };
 
   return (
@@ -150,15 +120,14 @@ export default function SignInForm({
       </fieldset> */}
       {error ? <h4>{(error as any).message}</h4> : null}
       <div className="forgotPassword">
-        <Link href={"#"}>Olvidaste tu contrasenia..?</Link>
+        <a href={"#"}>Olvidaste tu contrasenia..?</a>
       </div>
       <div className="formBtn">
         <button type="submit">Continuar</button>
       </div>
       <div className="formNewUser">
-        Ya tienes cuenta..? <Link href={"/login"}>Inicia Sesion aqui..</Link>
+        Ya tienes cuenta..? <a href={"/login"}>Inicia Sesion aqui..</a>
       </div>
     </form>
   );
 }
-

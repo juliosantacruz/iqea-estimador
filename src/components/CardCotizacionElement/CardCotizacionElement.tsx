@@ -1,11 +1,12 @@
 import React from "react";
 import "./CardCotizacionElement.scss";
-import { Cotizacion, useCotizacionStore } from "../../store/cotizacionStore";
+import { useCotizacionStore } from "../../store/cotizacionStore";
 import { useNavigate } from "react-router-dom";
+import { TypeCotizacion } from "../../Types/ProjectData";
 
 
 type CardProps = {
-  data: Cotizacion;
+  data: TypeCotizacion;
 };
 
 

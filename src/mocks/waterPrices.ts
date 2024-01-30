@@ -1,4 +1,4 @@
-import { PriceValue } from "@/Types/ProjectData";
+import { PriceValue } from "../Types/ProjectData";
 
 const filtracion: PriceValue[] = [];
 for (let index = 0; index < 50; index++) {
@@ -119,6 +119,7 @@ for (let index = 0; index < 50; index++) {
   ultrafiltracion.push(newElement);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const priceList: any = {
   osmosis,
   suavisador,

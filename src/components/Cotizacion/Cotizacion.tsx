@@ -4,10 +4,12 @@ import { TypeCotizacion } from "../../Types/ProjectData";
 
 // import React, { useState } from "react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import CotizacionPDF from "../../components/CotizacionPDF/CotizacionPDF";
 import iqeaLogo from "../../assets/iqea_logo.png";
 import { setFormat } from "../../utils/CurrencyFormat";
 import "./Cotizacion.scss";
+import { lazy } from "react";
+
+const CotizacionPDF = lazy(()=> import('../../components/CotizacionPDF/CotizacionPDF'))
 
 export default function Cotizacion({ id }: { id: string }) {
   const { cotizaciones } = useCotizacionStore();

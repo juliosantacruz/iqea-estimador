@@ -1,9 +1,9 @@
-"use client";
-import Link from "next/link";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import "./NewCustomerForm.scss";
 // import InputComponent from "@/components/InputComponent";
-import { useRouter } from "next/navigation";
 
 export type AddressType = {
   street: string;
@@ -82,7 +82,6 @@ async function postNewCustomer(customerData: any, token: any) {
 
 export default function NewCustomerForm({ token }: any) {
   const [formData, setFormData] = useState<SignInForm>(formTest);
-  const router = useRouter();
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -108,7 +107,7 @@ export default function NewCustomerForm({ token }: any) {
 
       // Si el registro es exitoso, redirige a la página de inicio
       if (customer.data) {
-        router.push("/");
+        console.log("/");
       } else {
         console.error("Error en el registro:", customer.data);
       }
