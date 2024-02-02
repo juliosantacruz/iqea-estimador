@@ -7,7 +7,6 @@ export type UserType = {
   email: string;
   company: string;
   isAdmin: boolean;
-  // jwtToken: {access:string, refresh:string};
 };
 
 type jwtTokens= {access:string, refresh:string}

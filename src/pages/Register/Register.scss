@@ -1,0 +1,106 @@
+// MOBILE FIRST
+// nav{
+//   display: none !important;
+// }
+.signInPage {
+  overflow: hidden;
+  color: var(--text-primary-color);
+  background-color: var(--background-signIn);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  height: 100vh;
+  .signInImg {
+    display: none;
+  }
+
+  .signInData {
+    width: 90%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .LogInHeader {
+      // .formTitle{
+      //   margin: 10px 0;
+      // }
+
+      img {
+        width: 100%;
+        margin: 40px 0;
+      }
+    }
+  }
+
+  @include media-up(sm) {
+    flex-direction: column;
+    .signInImg {
+      display: block;
+      overflow: hidden;
+    }
+
+    .signInData {
+      position: absolute;
+      top: 30%;
+      background-color: black;
+      max-width: 400px;
+      padding: 20px;
+    }
+  }
+
+  @include media-up(md) {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    .signInImg {
+      width: 50%;
+      img {
+        width: 100%;
+        height: calc(100vh);
+        object-fit: cover;
+      }
+    }
+    .signInData {
+      margin: 0 auto;
+      width: 50%;
+      position: initial;
+    }
+  }
+
+}
+// // padding: 0 var(--general-padding);
+
+// .signInImg{
+
+//   width: 50%;
+
+//   img{
+//     width: 100%;
+//     height: calc( 100vh );
+//     object-fit: cover;
+//   }
+// }
+// .signInData{
+//   width: 50%;
+
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   .LogInHeader{
+//     // .formTitle{
+//     //   margin: 10px 0;
+//     // }
+
+//     img{
+//       margin: 40px 0;
+//     }
+//   }
+
+// }
+
+// @include media-down(lg){
+
+// }

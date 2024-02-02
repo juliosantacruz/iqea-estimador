@@ -29,7 +29,7 @@ export default function LogInForm() {
   const leSubmit = handleSubmit(async (data: any) => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-
+    myHeaders.append("Access-Control-Allow-Origin", "*");
     const raw = JSON.stringify({
       username: data.username,
       password: data.password,

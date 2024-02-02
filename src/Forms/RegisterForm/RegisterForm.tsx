@@ -2,8 +2,11 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormEvent, useState } from "react";
-import "./SignUpForms.scss";
-// import InputComponent from "@/components/InputComponent";
+import "./RegisterForm.scss";
+import InputField from "../../components/InputField/InputField";
+import { useForm } from "react-hook-form";
+
+// import InputComponent from "../../components/InputComponent";
 
 export type SignInForm = {
   username: string;
@@ -20,14 +23,15 @@ const formTest = {
 };
 
 // Esta funcion registra a un Usuario nuevo, no requiere Auth
-export async function postNewUser(
+export async function RegisterFormNewUser(
   userData: any,
   setError: any,
   setLoading: any
 ) {
   try {
     const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Content-Type", "application/json")
+    myHeaders.append("Access-Control-Allow-Origin", "*");
 
     const raw = JSON.stringify(userData);
     const requestOptions = {
@@ -55,69 +59,88 @@ export async function postNewUser(
   }
 }
 
-export default function SignInForm({
+export default function RegisterForm({
   setLoading,
   setToken,
   setIsRegister,
 }: any) {
-  const [formData, setFormData] = useState<SignInForm>(formTest);
   const [error, setError] = useState();
+  const { register, handleSubmit } = useForm();
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setLoading(true);
-    setIsRegister(true);
-    const userData = {
-      username: formData.username,
-      email: formData.email,
-      password: formData.password,
-    };
-  };
+  const leSubmit = handleSubmit(async (data: any) => {
+    console.log(data);
+  });
 
   return (
-    <form
-      action=""
-      className="signInForm"
-      onSubmit={(event) => handleSubmit(event)}
-    >
-      {/* <fieldset title="useData">
+    <form action="" className="signInForm" onSubmit={leSubmit}>
+      <fieldset title="useData">
         <div className="formRow">
-          <InputComponent
+          <InputField
             name="username"
             label="Usuario"
             type="text"
-            value={formData.username}
-            inputChange={(event: any) => handleChange(event)}
+            register={register}
+          />
+        </div> <div className="formRow">
+          <InputField
+            name="name"
+            label="Nombre"
+            type="text"
+            register={register}
+
+          />
+        </div> <div className="formRow">
+          <InputField
+            name="lastname"
+            label="Apeido"
+            type="text"
+            register={register}
+
           />
         </div>
         <div className="formRow">
-          <InputComponent
+          <InputField
             name="email"
             label="Correo Electronico"
             type="email"
-            value={formData.email}
-            inputChange={(event: any) => handleChange(event)}
+            register={register}
+          />
+        </div>
+
+        <div className="formRow">
+          <InputField
+            name="company"
+            label="Empresa"
+            type="text"
+            register={register}
+
           />
         </div>
         <div className="formRow">
-          <InputComponent
+          <InputField
+            name="phone"
+            label="Telefono de Contacto"
+            type="text"
+            register={register}
+
+          />
+        </div><div className="formRow">
+          <InputField
             name="password"
             label="Contraseña"
             type="password"
-            value={formData.password}
-            inputChange={(event: any) => handleChange(event)}
+            register={register}
           />
         </div>
         <div className="formRow">
-          <InputComponent
+          <InputField
             name="password"
             label="Confirmar Contraseña"
             type="password"
-            value={formData.confirmPassword}
-            inputChange={(event: any) => handleChange(event)}
+            register={register}
           />
         </div>
-      </fieldset> */}
+      </fieldset>
       {error ? <h4>{(error as any).message}</h4> : null}
       <div className="forgotPassword">
         <a href={"#"}>Olvidaste tu contrasenia..?</a>
