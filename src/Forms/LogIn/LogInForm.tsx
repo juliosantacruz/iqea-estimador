@@ -1,10 +1,13 @@
-"use client";
-// import React, {  useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import {  useNavigate } from "react-router-dom";
 import "./LogInForm.scss";
 import InputField from "../../components/InputField/InputField";
-// import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
-// import { useUserStore } from "../../store/userStore";
+import { useUserStore } from "../../store/userStore";
+import { RoutesDirectory } from "../../routes/RoutesDirectory";
+import { jwtDecode } from "jwt-decode";
+
 
 export type LogInForm = {
   username: string;
@@ -18,38 +21,54 @@ export type LogInForm = {
 //   password: "",
 // };
 
-// const users = [
-//   {
-//     username: "arturo",
-//     password: "iqea2024",
-//     name: "arturo chavez",
-//     email: "arturo@iqea.mx",
-//     company: "IQEA",
-//     jwtToken: "jwtTOken_de_prueba",
-//     isAdmin: true,
-//   },
-//   {
-//     username: "julio",
-//     password: "iqea2024",
-//     name: "julio santacruz",
-//     email: "cto@iqea.mx",
-//     company: "IQEA",
-//     jwtToken: "jwtTOken_de_prueba",
-//     isAdmin: true,
-//   },
-// ]
-
 export default function LogInForm() {
-  const { register } = useForm();
+  const { register, handleSubmit } = useForm();
+  const {setTokens, setIsAuth, setUser}=useUserStore()
+  const navigate = useNavigate();
 
-  // useEffect(()=>{
-  //   if(isAuth){
-  //     router.push("/");
-  //   }
-  // },[])
+  const leSubmit = handleSubmit(async (data: any) => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      username: data.username,
+      password: data.password,
+    });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    const response = await fetch(
+      "http://127.0.0.1:8000/estimador/api/token/",
+      requestOptions as any
+    ).catch((error) => console.log("error", error));
+    if ((response as Response).status === 200) {
+      const rawData = await (response as Response).json();
+      const jwtData:any=jwtDecode(rawData.access)
+
+      const userData={
+        userId:jwtData.user_id,
+        username:jwtData.username,
+        email:jwtData.email,
+        company:jwtData.company,
+        isAdmin:jwtData.isAdmin,
+      }
+      setUser(userData)
+      setTokens(rawData)
+      setIsAuth(true)
+
+      navigate(RoutesDirectory.HOME);
+    } else {
+      console.error("algo salio mal");
+    }
+  });
 
   return (
-    <form action="" className="signInForm">
+    <form action="" className="signInForm" onSubmit={leSubmit}>
       <div className="formRow">
         <InputField
           name="username"

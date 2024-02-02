@@ -20,7 +20,6 @@ export default function CotizacionForm(props: any) {
 
     return priceValue;
   };
-  console.log(priceList);
   const setCotizacion = (data: any) => {
     const waterSystems = ["filtracion", "suavisador", "osmosis"];
     const wasteWaterSystems = [
