@@ -5,6 +5,9 @@ import { FormEvent, useState } from "react";
 import "./RegisterForm.scss";
 import InputField from "../../components/InputField/InputField";
 import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { RoutesDirectory } from "../../routes/RoutesDirectory";
+import { setRegisterServer } from "../../services/fetchData";
 
 // import InputComponent from "../../components/InputComponent";
 
@@ -23,14 +26,10 @@ const formTest = {
 };
 
 // Esta funcion registra a un Usuario nuevo, no requiere Auth
-export async function RegisterFormNewUser(
-  userData: any,
-  setError: any,
-  setLoading: any
-) {
+export async function RegisterFormNewUser(userData: any) {
   try {
     const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json")
+    myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Access-Control-Allow-Origin", "*");
 
     const raw = JSON.stringify(userData);
@@ -43,62 +42,91 @@ export async function RegisterFormNewUser(
     };
 
     const res = await fetch(
-      `http://localhost:1337/api/auth/local/register`,
+      `http://127.0.0.1:8000/estimador/api/register/`,
       requestOptions as any
     )
       .then((res) => res.text())
       .then((result) => result)
-      .catch((error) => setError(error));
+      .catch((error) => console.log(error));
 
     return JSON.parse(res as string);
   } catch (error) {
     console.error("Error during postNewUser:", error);
-    setError(error);
-    setLoading(false);
+
     throw error;
   }
 }
 
-export default function RegisterForm({
-  setLoading,
-  setToken,
-  setIsRegister,
-}: any) {
+export default function RegisterForm() {
   const [error, setError] = useState();
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   const leSubmit = handleSubmit(async (data: any) => {
     console.log(data);
+
+    if (data.password !== data.confirmPassword) {
+      console.log("Las contraseñas no coinciden");
+      return;
+    }
+
+    try {
+      // Modificar la estructura del objeto antes de enviarlo
+      const userData = {
+        username: data.username,
+        password: data.password,
+        email: data.email,
+        iqea_user: {
+          name: data.name,
+          last_name: data.lastname,
+          email: data.email,
+          phone: data.phone,
+          company: data.company,
+          isAdmin: false, // o false según tus necesidades
+        },
+      };
+      const register = await setRegisterServer(userData)
+      console.log(register)
+
+      if((register as any).ok){
+        navigate(RoutesDirectory.HOME);
+
+      }
+    } catch (error) {
+      console.error("Error during postNewUser:", error);
+
+      throw error;
+    }
   });
 
   return (
-    <form action="" className="signInForm" onSubmit={leSubmit}>
+    <form action="" className="registerForm" onSubmit={leSubmit}>
       <fieldset title="useData">
-        <div className="formRow">
+        <div className="formRowRegister">
           <InputField
             name="username"
             label="Usuario"
             type="text"
             register={register}
           />
-        </div> <div className="formRow">
+        </div>{" "}
+        <div className="formRowRegister">
           <InputField
             name="name"
             label="Nombre"
             type="text"
             register={register}
-
           />
-        </div> <div className="formRow">
+        </div>{" "}
+        <div className="formRowRegister">
           <InputField
             name="lastname"
             label="Apeido"
             type="text"
             register={register}
-
           />
         </div>
-        <div className="formRow">
+        <div className="formRowRegister">
           <InputField
             name="email"
             label="Correo Electronico"
@@ -106,25 +134,23 @@ export default function RegisterForm({
             register={register}
           />
         </div>
-
-        <div className="formRow">
+        <div className="formRowRegister">
           <InputField
             name="company"
             label="Empresa"
             type="text"
             register={register}
-
           />
         </div>
-        <div className="formRow">
+        <div className="formRowRegister">
           <InputField
             name="phone"
             label="Telefono de Contacto"
             type="text"
             register={register}
-
           />
-        </div><div className="formRow">
+        </div>
+        <div className="formRowRegister">
           <InputField
             name="password"
             label="Contraseña"
@@ -132,9 +158,9 @@ export default function RegisterForm({
             register={register}
           />
         </div>
-        <div className="formRow">
+        <div className="formRowRegister">
           <InputField
-            name="password"
+            name="confirmPassword"
             label="Confirmar Contraseña"
             type="password"
             register={register}
@@ -149,7 +175,8 @@ export default function RegisterForm({
         <button type="submit">Continuar</button>
       </div>
       <div className="formNewUser">
-        Ya tienes cuenta..? <a href={"/login"}>Inicia Sesion aqui..</a>
+        Ya tienes cuenta..?{" "}
+        <Link to={RoutesDirectory.LOG_IN}>Inicia Sesion aqui..</Link>
       </div>
     </form>
   );

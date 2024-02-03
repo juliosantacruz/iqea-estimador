@@ -21,10 +21,10 @@ export default function LogIn() {
 
         </div>
 
-        <div className="form">
+        <>
 
         <LogInForm/>
-        </div>
+        </>
       </div>
     </section>
     </section>

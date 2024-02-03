@@ -19,9 +19,9 @@ export default function Register() {
             <img src={logoImage} alt="logo" width={300} />
           </div>
 
-          <div className="form">
+          <>
             <RegisterForm />
-          </div>
+          </>
         </div>
       </section>
     </section>
