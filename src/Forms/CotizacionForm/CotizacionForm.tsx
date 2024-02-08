@@ -30,14 +30,14 @@ export default function CotizacionForm(props: any) {
     ];
     const reusoSystems = ["osmosisReuso", "ultrafiltracion"];
 
-    const projectData = {
+    const project_data = {
       id: IDFromName(data.name),
       name: data.name,
       location: data.location,
       date: data.date,
     };
 
-    const waterCotizacion = waterSystems
+    const water_cotizacion = waterSystems
       .map((system) => {
         if (data[system]) {
           const priceData = setPrice(data[system], priceList[system]);
@@ -51,7 +51,7 @@ export default function CotizacionForm(props: any) {
       })
       .filter((element) => element !== undefined);
 
-    const wasteWaterCotizacion = wasteWaterSystems
+    const waste_water_cotizacion = wasteWaterSystems
       .map((system) => {
         if (data[system]) {
           const priceData = setPrice(data[system], priceList[system]);
@@ -65,7 +65,7 @@ export default function CotizacionForm(props: any) {
       })
       .filter((element) => element !== undefined);
 
-    const reusoCotizacion = reusoSystems
+    const reuso_cotizacion = reusoSystems
       .map((system) => {
         if (data[system]) {
           console.log('lol 1 ',data[system]);
@@ -85,10 +85,10 @@ export default function CotizacionForm(props: any) {
       .filter((element) => element !== undefined);
 
     return {
-      projectData,
-      waterCotizacion,
-      wasteWaterCotizacion,
-      reusoCotizacion,
+      project_data,
+      water_cotizacion,
+      waste_water_cotizacion,
+      reuso_cotizacion,
     };
   };
 

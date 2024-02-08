@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ListElementsCotizacion from "../../components/ListElementsCotizacion/ListElementsCotizacion";
 import NewElementBtn from "../../components/NewElementBtn/NewElementBtn";
 import "./Inicio.scss";
 import { getAllProjects } from "../../services/fetchData";
+import {useUserStore} from "../../store/userStore"
+import { useCotizacionStore } from "../../store/cotizacionStore";
 
 
 export default function Inicio() {
-  const [project, setProjects]= useState()
-  console.log(project)
+  const {jwtTokens} = useUserStore()
+  const {loadCotizaciones} = useCotizacionStore()
+
+
   useEffect(()=>{
     async function getData(){
-      const res = await getAllProjects()
-      setProjects(res)
+      const res = await getAllProjects(jwtTokens?.access as string)
+      loadCotizaciones(res)
     }
     getData()
   },[])
@@ -26,3 +30,4 @@ export default function Inicio() {
     </section>
   );
 }
+

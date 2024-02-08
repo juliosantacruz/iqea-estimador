@@ -1,44 +1,38 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useCotizacionStore } from "../../store/cotizacionStore";
-import { PriceValue, ProjectData, TypeCotizacion } from "../../Types/ProjectData";
+import {
+  ProjectData,
+  TypeCotizacion,
+} from "../../Types/ProjectData";
 
-// import React, { useState } from "react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import iqeaLogo from "../../assets/iqea_logo.png";
 import { setFormat } from "../../utils/CurrencyFormat";
-import "./Cotizacion.scss";
-import { lazy } from "react";
 import CotizacionPDF from "../../components/CotizacionPDF/CotizacionPDF";
-// const CotizacionPDF = lazy(()=> import('../../components/CotizacionPDF/CotizacionPDF'))
+import "./Cotizacion.scss";
 
-export default function Cotizacion({ id }: { id: string }) {
-  const { cotizaciones } = useCotizacionStore();
+export default function Cotizacion({ leData }: { leData: TypeCotizacion }) {
 
-  const data = cotizaciones.find(
-    (cotizacion) => cotizacion.projectData?.id === id
-  );
+
   const {
-    projectData,
-    waterCotizacion,
-    wasteWaterCotizacion,
-    reusoCotizacion,
-  } = data as TypeCotizacion;
+    project_data,
+    water_cotizacion,
+    waste_water_cotizacion,
+    reuso_cotizacion,
+  } = leData as TypeCotizacion;
 
-  console.log("id", id);
 
   const totalObra: number[] = [];
 
-  waterCotizacion?.map((element) => {
+  water_cotizacion?.map((element) => {
     const { flow = 0, price = 0 } = element;
     const total = flow * price;
     totalObra.push(total);
   });
-  wasteWaterCotizacion?.map((element) => {
+  waste_water_cotizacion?.map((element) => {
     const { flow = 0, price = 0 } = element;
     const total = flow * price;
     totalObra.push(total);
   });
-  reusoCotizacion?.map((element) => {
+  reuso_cotizacion?.map((element) => {
     const { flow = 0, price = 0 } = element;
     const total = flow * price;
     totalObra.push(total);
@@ -52,8 +46,8 @@ export default function Cotizacion({ id }: { id: string }) {
     <>
       <div className="pdfBtn">
         <PDFDownloadLink
-          document={<CotizacionPDF data={data} />}
-          fileName={`Cotizacion_${(projectData as ProjectData).name}.pdf`}
+          document={<CotizacionPDF data={leData} />}
+          fileName={`Cotizacion_${(project_data as ProjectData).name}.pdf`}
         >
           {({ loading }) =>
             loading ? <button>Cargando...</button> : <button>Descargar</button>
@@ -78,7 +72,7 @@ export default function Cotizacion({ id }: { id: string }) {
         </div> */}
           <div className="HeaderCotizacion">
             <h3>Estimacion de Costo</h3>
-            <p>Folio: {id}</p>
+            <p>Folio: {"id"}</p>
             <p>Emitida</p>
             <p>Febrero 12, 2024</p>
           </div>
@@ -99,15 +93,15 @@ export default function Cotizacion({ id }: { id: string }) {
           <div className="ContentProjectData">
             <div className="projectDataRow">
               <p className="rowTitle">Projecto: </p>
-              <p>{projectData?.name}</p>
+              <p>{project_data?.name}</p>
             </div>
             <div className="projectDataRow">
               <p>Fecha de Arranque: </p>
-              <p className="rowTitle">{projectData?.date}</p>
+              <p className="rowTitle">{project_data?.date}</p>
             </div>
             <div className="projectDataRow">
               <p className="rowTitle">Ubicacion de Obra: </p>
-              <p>{projectData?.location}</p>
+              <p>{project_data?.location}</p>
             </div>
           </div>
           <div className="contentSystems">
@@ -124,8 +118,8 @@ export default function Cotizacion({ id }: { id: string }) {
                 </tr>
               </thead>
               <tbody>
-                {waterCotizacion &&
-                  waterCotizacion.map((row) => {
+                {water_cotizacion &&
+                  water_cotizacion.map((row) => {
                     const { flow = 0, price = 0, unit, system } = row;
                     const total = flow * price;
                     totalObra.push(total);
@@ -146,8 +140,8 @@ export default function Cotizacion({ id }: { id: string }) {
                       </tr>
                     );
                   })}
-                {wasteWaterCotizacion &&
-                  wasteWaterCotizacion.map((row) => {
+                {waste_water_cotizacion &&
+                  waste_water_cotizacion.map((row) => {
                     const { flow = 0, price = 0, unit, system } = row;
                     const total = flow * price;
                     totalObra.push(total);
@@ -168,8 +162,8 @@ export default function Cotizacion({ id }: { id: string }) {
                       </tr>
                     );
                   })}
-                {reusoCotizacion &&
-                  reusoCotizacion.map((row) => {
+                {reuso_cotizacion &&
+                  reuso_cotizacion.map((row) => {
                     const { flow = 0, price = 0, unit, system } = row;
                     const total = flow * price;
                     totalObra.push(total);

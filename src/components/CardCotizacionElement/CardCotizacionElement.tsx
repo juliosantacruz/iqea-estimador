@@ -16,15 +16,15 @@ export default function CardCotizacionElement({ data }: CardProps) {
 
   const {deleteCotizacion}= useCotizacionStore()
   const {
-    projectData,
-    waterCotizacion,
-    wasteWaterCotizacion,
-    reusoCotizacion,
+    project_data,
+    water_cotizacion,
+    waste_water_cotizacion,
+    reuso_cotizacion,
   } = data;
 
 
   const handleDelete=()=>{
-    deleteCotizacion(projectData?.id as string)
+    deleteCotizacion(project_data?.id as string)
   }
 
   const handleDetalle=(id:string)=>{
@@ -35,7 +35,7 @@ export default function CardCotizacionElement({ data }: CardProps) {
     <article className="listElement">
       <div className="listContent">
         <div className="listHeader">
-          <h3>{projectData?.name.toUpperCase()}</h3>
+          <h3>{project_data?.name?.toUpperCase()}</h3>
           <p className="date">Fecha de creacion: {' '} <span>12-02-2024</span> </p>
           <p className="date">Ubicacion de proyecto: {" "}<span>Sonora</span> </p>
 
@@ -43,8 +43,8 @@ export default function CardCotizacionElement({ data }: CardProps) {
         <div className="listFooter">
           <p>Sistemas Cotizados:</p>
           <ul>
-            {waterCotizacion &&
-              waterCotizacion.map((element) => {
+            {water_cotizacion &&
+              water_cotizacion.map((element) => {
                 return (
                   <li
                     key={element.id}
@@ -54,8 +54,8 @@ export default function CardCotizacionElement({ data }: CardProps) {
                   </li>
                 );
               })}
-            {wasteWaterCotizacion &&
-              wasteWaterCotizacion.map((element) => {
+            {waste_water_cotizacion &&
+              waste_water_cotizacion.map((element) => {
                 return (
                   <li
                     key={element.id}
@@ -65,8 +65,8 @@ export default function CardCotizacionElement({ data }: CardProps) {
                   </li>
                 );
               })}
-            {reusoCotizacion &&
-              reusoCotizacion.map((element) => {
+            {reuso_cotizacion &&
+              reuso_cotizacion.map((element) => {
                 return (
                   <li
                     key={element.id}
@@ -81,7 +81,7 @@ export default function CardCotizacionElement({ data }: CardProps) {
       </div>
       <div className="listButton">
         <button className="delete" onClick={handleDelete}>Eliminar</button>
-        <button className="details" onClick={()=>handleDetalle(projectData?.id as string)}>Ver Detalle</button>
+        <button className="details" onClick={()=>handleDetalle(project_data?.id as string)}>Ver Detalle</button>
       </div>
     </article>
   );

@@ -1,8 +1,17 @@
 import { useParams } from "react-router-dom";
 import Cotizacion from "../../components/Cotizacion/Cotizacion";
+import { useCotizacionStore } from "../../store/cotizacionStore";
 
 export default function Details() {
-  const {projectId} = useParams()
+  const { projectId } = useParams();
+  const { cotizaciones } = useCotizacionStore();
+
+  const data = cotizaciones.find(
+    cotizacion => {
+      const cotizacionID = cotizacion.project_data?.id.toString()
+      if(cotizacionID === projectId) return cotizacion
+    }
+    );
 
   return (
     <section className="detailsPage">
@@ -10,7 +19,12 @@ export default function Details() {
         <h1>Estimacion de Costo</h1>
       </div>
 
-      <Cotizacion id={projectId as string} />
+      {
+        data&&
+        <Cotizacion leData={data} />
+
+      }
+
     </section>
   );
 }

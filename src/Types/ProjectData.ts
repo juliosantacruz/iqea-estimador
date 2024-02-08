@@ -14,16 +14,9 @@ export type PriceValue = {
   currency?: string;
 };
 
-// export type Cotizacion = {
-//   projectData: ProjectData;
-//   waterCotizacion?: PriceValue[];
-//   wasteWaterCotizacion?: PriceValue[];
-//   reusoCotizacion?: PriceValue[];
-// };
-
 export interface TypeCotizacion {
-  projectData?: ProjectData;
-  waterCotizacion?: PriceValue[];
-  wasteWaterCotizacion?: PriceValue[]|[];
-  reusoCotizacion?: PriceValue[]|[];
+  project_data?: ProjectData;
+  water_cotizacion?: PriceValue[];
+  waste_water_cotizacion?: PriceValue[]|[];
+  reuso_cotizacion?: PriceValue[]|[];
 }

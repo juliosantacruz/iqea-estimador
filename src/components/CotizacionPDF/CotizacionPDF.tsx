@@ -14,10 +14,10 @@ import { setFormat } from "../../utils/CurrencyFormat";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function CotizacionPDF({ data }: any) {
   const {
-    projectData,
-    waterCotizacion,
-    wasteWaterCotizacion,
-    reusoCotizacion,
+    project_data,
+    water_cotizacion,
+    waste_water_cotizacion,
+    reuso_cotizacion,
   } = data as TypeCotizacion;
 
   const styles = StyleSheet.create({
@@ -119,21 +119,21 @@ function CotizacionPDF({ data }: any) {
       color: "grey",
     },
   });
-  console.log(styles);
+  // console.log(styles);
 
   const totalObra: number[] = [];
 
-  waterCotizacion?.map((element) => {
+  water_cotizacion?.map((element) => {
     const { flow = 0, price = 0 } = element;
     const total = flow * price;
     totalObra.push(total);
   });
-  wasteWaterCotizacion?.map((element) => {
+  waste_water_cotizacion?.map((element) => {
     const { flow = 0, price = 0 } = element;
     const total = flow * price;
     totalObra.push(total);
   });
-  reusoCotizacion?.map((element) => {
+  reuso_cotizacion?.map((element) => {
     const { flow = 0, price = 0 } = element;
     const total = flow * price;
     totalObra.push(total);
@@ -141,7 +141,7 @@ function CotizacionPDF({ data }: any) {
   const SubTotal = totalObra.reduce((total, numero) => total + numero, 0);
   const iva = SubTotal * 0.16;
   const TotalObra = SubTotal + iva;
-  console.log("total", totalObra);
+  // console.log("total", totalObra);
 
   return (
     <Document>
@@ -165,7 +165,7 @@ function CotizacionPDF({ data }: any) {
         </View>
         <View style={styles.projectDataRow}>
           <Text style={styles.projectDataText}>Projecto:</Text>
-          <Text style={styles.projectDataText}>{projectData?.name}</Text>
+          <Text style={styles.projectDataText}>{project_data?.name}</Text>
         </View>
         <View style={styles.projectDataRow}>
           <Text style={styles.projectDataText}>Fecha de Arranque:</Text>
@@ -203,8 +203,8 @@ function CotizacionPDF({ data }: any) {
             </View>
           </View>
           <View style={styles.tbody}>
-            {waterCotizacion &&
-              waterCotizacion.map((row: PriceValue) => {
+            {water_cotizacion &&
+              water_cotizacion.map((row: PriceValue) => {
                 const { flow = 0, price = 0, unit, system } = row;
                 const total = flow * price;
                 return (
@@ -236,8 +236,8 @@ function CotizacionPDF({ data }: any) {
                 );
               })}
 
-            {wasteWaterCotizacion &&
-              wasteWaterCotizacion.map((row: PriceValue) => {
+            {waste_water_cotizacion &&
+              waste_water_cotizacion.map((row: PriceValue) => {
                 const { flow = 0, price = 0, unit, system } = row;
                 const total = flow * price;
                 return (
@@ -269,8 +269,8 @@ function CotizacionPDF({ data }: any) {
                 );
               })}
 
-            {reusoCotizacion &&
-              reusoCotizacion.map((row: PriceValue) => {
+            {reuso_cotizacion &&
+              reuso_cotizacion.map((row: PriceValue) => {
                 const { flow = 0, price = 0, unit, system } = row;
                 const total = flow * price;
                 return (
