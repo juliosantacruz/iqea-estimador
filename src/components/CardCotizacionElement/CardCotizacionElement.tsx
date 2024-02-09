@@ -3,6 +3,8 @@ import "./CardCotizacionElement.scss";
 import { useCotizacionStore } from "../../store/cotizacionStore";
 import { useNavigate } from "react-router-dom";
 import { TypeCotizacion } from "../../Types/ProjectData";
+import { useUserStore } from "../../store/userStore";
+import { deleteProject } from "../../services/fetchData";
 
 
 type CardProps = {
@@ -13,7 +15,7 @@ type CardProps = {
 
 export default function CardCotizacionElement({ data }: CardProps) {
   const navigate = useNavigate();
-
+  const {jwtTokens} = useUserStore()
   const {deleteCotizacion}= useCotizacionStore()
   const {
     project_data,
@@ -25,6 +27,7 @@ export default function CardCotizacionElement({ data }: CardProps) {
 
   const handleDelete=()=>{
     deleteCotizacion(project_data?.id as string)
+    deleteProject(project_data?.id as string, jwtTokens?.access as string)
   }
 
   const handleDetalle=(id:string)=>{

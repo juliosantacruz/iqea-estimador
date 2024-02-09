@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
+import { TypeCotizacion } from "../Types/ProjectData";
 
 const baseUrl = "http://127.0.0.1:8000/estimador/api/";
 
@@ -14,6 +15,53 @@ export const getAllProjects = async (token: string) => {
     throw error;
   }
 };
+
+export const postNewProject = async (projectData:TypeCotizacion, token: string)=>{
+const data = JSON.stringify(projectData);
+
+const config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: `${baseUrl}v1/projects/`,
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+  data : data
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+
+}
+
+export const deleteProject = async (cotizacion_id:string, token:string)=>{
+const data = '';
+
+const config = {
+  method: 'delete',
+  maxBodyLength: Infinity,
+  url: `${baseUrl}v1/projects/${cotizacion_id}`,
+  headers: {
+    'Authorization': `Bearer ${token}`
+  },
+  data : data
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+  return response
+})
+.catch((error) => {
+  console.log(error);
+});
+}
 
 export const setLogInServer = async (userData: {
   username: string;

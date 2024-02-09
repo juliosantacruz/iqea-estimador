@@ -7,9 +7,12 @@ import { priceList } from "../../mocks/waterPrices";
 import { PriceValue } from "../../Types/ProjectData";
 import { useCotizacionStore } from "../../store/cotizacionStore";
 import { IDFromName } from "../../utils/ID_Generator";
+import { postNewProject } from "../../services/fetchData";
+import { useUserStore } from "../../store/userStore";
 
 export default function CotizacionForm(props: any) {
   const { addCotizacion } = useCotizacionStore();
+  const {user, jwtTokens}=useUserStore()
   const { modal } = props;
 
   const { register, handleSubmit } = useForm();
@@ -89,12 +92,14 @@ export default function CotizacionForm(props: any) {
       water_cotizacion,
       waste_water_cotizacion,
       reuso_cotizacion,
+      user:user?.userId
     };
   };
 
   const leSubmit = handleSubmit((data: any) => {
     const cotizacionData: any = setCotizacion(data);
     addCotizacion(cotizacionData);
+    postNewProject(cotizacionData, jwtTokens?.access as string)
     // console.log(cotizacionData);
 
     modal.setViewForm(false);

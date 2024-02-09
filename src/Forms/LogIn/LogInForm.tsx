@@ -8,6 +8,7 @@ import { useUserStore } from "../../store/userStore";
 import { RoutesDirectory } from "../../routes/RoutesDirectory";
 import { jwtDecode } from "jwt-decode";
 import { setLogInServer } from "../../services/fetchData";
+import { useState } from "react";
 
 export type LogInForm = {
   username: string;
@@ -22,6 +23,7 @@ export type LogInForm = {
 // };
 
 export default function LogInForm() {
+  const [error, setError]=useState(false)
   const { register, handleSubmit } = useForm();
   const { setTokens, setIsAuth, setUser } = useUserStore();
   const navigate = useNavigate();
@@ -40,6 +42,7 @@ export default function LogInForm() {
         company: jwtData.company,
         isAdmin: jwtData.isAdmin,
       };
+      setError(false)
       setUser(userData);
       setTokens(rawData);
       setIsAuth(true);
@@ -47,6 +50,7 @@ export default function LogInForm() {
       navigate(RoutesDirectory.HOME);
     } else {
       console.error("algo salio mal");
+      setError(true)
     }
   });
 
@@ -68,6 +72,10 @@ export default function LogInForm() {
           register={register}
         />
       </div>
+      {
+        error&&
+        <p className="loginError">{"-> Contraseña o usuario no coincide, por favor verifique"}</p>
+      }
 
       <div className="forgotPassword">
         <Link to={"#"}>Olvidaste tu contrasenia..?</Link>

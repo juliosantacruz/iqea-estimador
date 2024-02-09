@@ -16,7 +16,7 @@ export default function ListElementsCotizacion() {
           return (
             <CardCotizacionElement
               data={element}
-              key={element.project_data?.name}
+              key={element.project_data?.id}
             />
           );
         })}

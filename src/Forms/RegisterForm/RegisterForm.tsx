@@ -7,7 +7,9 @@ import InputField from "../../components/InputField/InputField";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesDirectory } from "../../routes/RoutesDirectory";
-import { setRegisterServer } from "../../services/fetchData";
+import { setLogInServer, setRegisterServer } from "../../services/fetchData";
+import { jwtDecode } from "jwt-decode";
+import { useUserStore } from "../../store/userStore";
 
 // import InputComponent from "../../components/InputComponent";
 
@@ -58,7 +60,10 @@ export async function RegisterFormNewUser(userData: any) {
 }
 
 export default function RegisterForm() {
-  const [error, setError] = useState();
+  const { setTokens, setIsAuth, setUser } = useUserStore();
+
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
@@ -66,7 +71,8 @@ export default function RegisterForm() {
     console.log(data);
 
     if (data.password !== data.confirmPassword) {
-      console.log("Las contraseñas no coinciden");
+      setError(true);
+      setErrorMessage("Las contraseñas no coinciden");
       return;
     }
 
@@ -85,12 +91,42 @@ export default function RegisterForm() {
           isAdmin: false, // o false según tus necesidades
         },
       };
-      const register = await setRegisterServer(userData)
-      console.log(register)
+      const register = await setRegisterServer(userData);
+      console.log(register);
 
-      if((register as any).ok){
+      if ((register as any).statusText === "Bad Request") {
+        setError(true);
+        setErrorMessage(
+          `Usuario o Correo Electronio no estan disponibles, por favor verique su informacion..`
+        );
+      }
+
+      if ((register as any).ok) {
+        const logInResponse = await setLogInServer(userData);
+
+        if ((logInResponse as Response).status === 200) {
+          const rawData = await (logInResponse as Response).json();
+          const jwtData: any = jwtDecode(rawData.access);
+
+          const userData = {
+            userId: jwtData.user_id,
+            username: jwtData.username,
+            email: jwtData.email,
+            company: jwtData.company,
+            isAdmin: jwtData.isAdmin,
+          };
+          setError(false);
+          setUser(userData);
+          setTokens(rawData);
+          setIsAuth(true);
+
+          navigate(RoutesDirectory.HOME);
+        } else {
+          console.error("algo salio mal");
+          setError(true);
+        }
+
         navigate(RoutesDirectory.HOME);
-
       }
     } catch (error) {
       console.error("Error during postNewUser:", error);
@@ -167,7 +203,7 @@ export default function RegisterForm() {
           />
         </div>
       </fieldset>
-      {error ? <h4>{(error as any).message}</h4> : null}
+      {error ? <p className="registerError">{errorMessage as string}</p> : null}
       <div className="forgotPassword">
         <a href={"#"}>Olvidaste tu contrasenia..?</a>
       </div>
