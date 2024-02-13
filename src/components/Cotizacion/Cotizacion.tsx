@@ -8,9 +8,11 @@ import iqeaLogo from "../../assets/iqea_logo.png";
 import { setFormat } from "../../utils/CurrencyFormat";
 import CotizacionPDF from "../../components/CotizacionPDF/CotizacionPDF";
 import "./Cotizacion.scss";
+import { setDateFormat } from "../../utils/DateFormat";
 
 export default function Cotizacion({ leData }: { leData: TypeCotizacion }) {
-
+  const dateTest = setDateFormat(leData.created as string)
+  console.log(dateTest)
 
   const {
     project_data,
@@ -72,9 +74,10 @@ export default function Cotizacion({ leData }: { leData: TypeCotizacion }) {
         </div> */}
           <div className="HeaderCotizacion">
             <h3>Estimacion de Costo</h3>
-            <p>Folio: {"id"}</p>
+            <p>Folio: {project_data?.id}</p>
             <p>Emitida</p>
-            <p>Febrero 12, 2024</p>
+            <p className="headerInfo">Fecha de Creacion: </p>
+            <p className="headerData">{dateTest}</p>
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 // import { lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import Inicio from "../pages/Inicio";
+import Dashboard from "../pages/Dashboard";
 import LogIn from "../pages/LogIn";
 import NotFound from "../pages/NotFound";
 import ErrorPage from "../pages/ErrorPage";
@@ -8,6 +9,7 @@ import Details from "../pages/Details"
 import { RoutesDirectory } from "./RoutesDirectory";
 import { ProtectedRoute } from "../libs/ProtectedRoutes";
 import Register from "../pages/Register";
+import Perfil from "../pages/Perfil";
 
 
 const AppRoutes = () => {
@@ -18,6 +20,8 @@ const AppRoutes = () => {
     { element: <ProtectedRoute isAllowed={false} />, children:[
       { path: RoutesDirectory.HOME, element: <Inicio />, errorElement:<ErrorPage/> },
       { path: RoutesDirectory.DETAILS, element: <Details/>},
+      { path: RoutesDirectory.DASHBOARD, element: <Dashboard />, errorElement:<ErrorPage/> },
+      { path: RoutesDirectory.PERFIL, element: <Perfil />, errorElement:<ErrorPage/> },
 
 
     ]},

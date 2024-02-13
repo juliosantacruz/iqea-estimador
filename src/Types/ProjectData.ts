@@ -15,6 +15,8 @@ export type PriceValue = {
 };
 
 export interface TypeCotizacion {
+  created?: string;
+  user?:string|number;
   project_data?: ProjectData;
   water_cotizacion?: PriceValue[];
   waste_water_cotizacion?: PriceValue[]|[];

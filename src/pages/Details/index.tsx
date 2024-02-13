@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import Cotizacion from "../../components/Cotizacion/Cotizacion";
 import { useCotizacionStore } from "../../store/cotizacionStore";
+import './Details.scss'
 
 export default function Details() {
   const { projectId } = useParams();

@@ -4,6 +4,34 @@ import { TypeCotizacion } from "../Types/ProjectData";
 
 const baseUrl = "http://127.0.0.1:8000/estimador/api/";
 
+
+export const getAllUsersAdmin = async (token: string) => {
+  try {
+    axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+
+    const res = await axios.get(`${baseUrl}v1/iqea_users/`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+
+
+export const getAllProjectsAdmin = async (token: string) => {
+  try {
+    axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+
+    const res = await axios.get(`${baseUrl}v1/allProjects/`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+
 export const getAllProjects = async (token: string) => {
   try {
     axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
@@ -15,6 +43,7 @@ export const getAllProjects = async (token: string) => {
     throw error;
   }
 };
+
 
 export const postNewProject = async (projectData:TypeCotizacion, token: string)=>{
 const data = JSON.stringify(projectData);
