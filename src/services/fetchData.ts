@@ -2,7 +2,7 @@
 import axios from "axios";
 import { TypeCotizacion } from "../Types/ProjectData";
 
-const baseUrl = "http://164.92.126.240:8000/estimador/api/";
+const baseUrl = "https://www.server.iqea.me/estimador/api/";
 
 export const getAllUsersAdmin = async (token: string) => {
   try {
