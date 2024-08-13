@@ -14,7 +14,7 @@ type InputProps = {
   register: any;
 };
 
-const selectedUnits = ["m³/d", "m³/h", "lts/hr", "GPD", "GPH"];
+const selectedUnits = ["GPM","m³/d", "m³/h", "lts/hr", "GPD", ];
 
 export default function InputFieldUnit({
   className,

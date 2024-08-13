@@ -11,6 +11,8 @@ import { postNewProject } from "../../services/fetchData";
 import { useUserStore } from "../../store/userStore";
 
 export default function CotizacionForm(props: any) {
+  const isDev = import.meta.env.VITE_IS_DEV === "false" ? false : true;
+
   const { addCotizacion } = useCotizacionStore();
   const {user, jwtTokens}=useUserStore()
   const { modal } = props;
@@ -20,9 +22,9 @@ export default function CotizacionForm(props: any) {
   const setPrice = (flow: number, arrPrice: PriceValue[]) => {
     const value = Math.ceil(flow);
     const priceValue = arrPrice.find((element) => element.flow === value);
-
     return priceValue;
   };
+
   const setCotizacion = (data: any) => {
     const waterSystems = ["filtracion", "suavisador", "osmosis"];
     const wasteWaterSystems = [
@@ -42,11 +44,14 @@ export default function CotizacionForm(props: any) {
 
     const water_cotizacion = waterSystems
       .map((system) => {
+        console.log(system, data)
         if (data[system]) {
           const priceData = setPrice(data[system], priceList[system]);
           const systemData: PriceValue = {
             id: system,
             system: system,
+            flow:data[system],
+            unit:data[`${system}-unit`],
             ...priceData,
           };
           return systemData;
@@ -61,6 +66,8 @@ export default function CotizacionForm(props: any) {
           const systemData = {
             id: system,
             system: system,
+            flow:data[system],
+            unit:data[`${system}-unit`],
             ...priceData,
           };
           return systemData;
@@ -71,13 +78,12 @@ export default function CotizacionForm(props: any) {
     const reuso_cotizacion = reusoSystems
       .map((system) => {
         if (data[system]) {
-          console.log('lol 1 ',data[system]);
           const priceData = setPrice(data[system], priceList[system]);
-          console.log(priceData);
-
           const systemData = {
             id: system,
             system: system,
+            flow:data[system],
+            unit:data[`${system}-unit`],
             ...priceData,
           };
           console.log(systemData);
@@ -99,8 +105,13 @@ export default function CotizacionForm(props: any) {
   const leSubmit = handleSubmit((data: any) => {
     const cotizacionData: any = setCotizacion(data);
     addCotizacion(cotizacionData);
-    postNewProject(cotizacionData, jwtTokens?.access as string)
-    // console.log(cotizacionData);
+    if(!isDev){
+      postNewProject(cotizacionData, jwtTokens?.access as string)
+    }
+    // if(isDev){
+
+    // }
+
 
     modal.setViewForm(false);
   });

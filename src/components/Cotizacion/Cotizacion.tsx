@@ -56,6 +56,9 @@ export default function Cotizacion({ leData }: { leData: TypeCotizacion }) {
           }
         </PDFDownloadLink>
       </div>
+      <div className="cotizacionContainer">
+
+
       <article className="cotizacion">
         <div className="Header">
           <div className="HeaderLogo">
@@ -221,7 +224,7 @@ export default function Cotizacion({ leData }: { leData: TypeCotizacion }) {
             <p>AGENTE SUPERVISOR</p>
           </div>
         </div>
-      </article>
+      </article> </div>
     </>
   );
 }

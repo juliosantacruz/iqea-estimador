@@ -10,6 +10,8 @@ import { RoutesDirectory } from "./RoutesDirectory";
 import { ProtectedRoute } from "../libs/ProtectedRoutes";
 import Register from "../pages/Register";
 import Perfil from "../pages/Perfil";
+import Configuracion from "../pages/Configuracion/Configuracion";
+import SystemDetails from "../pages/SystemDetails/SystemDetails";
 
 
 const AppRoutes = () => {
@@ -22,6 +24,9 @@ const AppRoutes = () => {
       { path: RoutesDirectory.DETAILS, element: <Details/>},
       { path: RoutesDirectory.DASHBOARD, element: <Dashboard />, errorElement:<ErrorPage/> },
       { path: RoutesDirectory.PERFIL, element: <Perfil />, errorElement:<ErrorPage/> },
+      { path: RoutesDirectory.CONFIG, element: <Configuracion />, errorElement:<ErrorPage/> },
+      { path: RoutesDirectory.CONFIG_SYSTEM, element: <SystemDetails />, errorElement:<ErrorPage/> },
+
 
 
     ]},

@@ -16,41 +16,56 @@ export type LogInForm = {
   password: string;
 };
 
-// const formTest = {
-//   username: "",
-//   email: "",
-//   password: "",
-// };
-
 export default function LogInForm() {
-  const [error, setError]=useState(false)
+  const isDev = import.meta.env.VITE_IS_DEV === "false" ? false : true;
+  const [error, setError] = useState(false);
   const { register, handleSubmit } = useForm();
   const { setTokens, setIsAuth, setUser } = useUserStore();
   const navigate = useNavigate();
 
   const leSubmit = handleSubmit(async (data: any) => {
-    const response = await setLogInServer(data)
+    if (!isDev) {
+      const response = await setLogInServer(data);
+      if ((response as Response).status === 200) {
+        const rawData = await (response as Response).json();
+        const jwtData: any = jwtDecode(rawData.access);
+        const userData = {
+          userId: jwtData.user_id,
+          username: jwtData.username,
+          email: jwtData.email,
+          company: jwtData.company,
+          isAdmin: jwtData.isAdmin,
+        };
+        setError(false);
+        setUser(userData);
+        setTokens(rawData);
+        setIsAuth(true);
+        navigate(RoutesDirectory.HOME);
+      } else {
+        console.error("algo salio mal");
+        setError(true);
+      }
+    }
 
-    if ((response as Response).status === 200) {
-      const rawData = await (response as Response).json();
-      const jwtData: any = jwtDecode(rawData.access);
-
-      const userData = {
-        userId: jwtData.user_id,
-        username: jwtData.username,
-        email: jwtData.email,
-        company: jwtData.company,
-        isAdmin: jwtData.isAdmin,
-      };
-      setError(false)
-      setUser(userData);
-      setTokens(rawData);
-      setIsAuth(true);
-
-      navigate(RoutesDirectory.HOME);
-    } else {
-      console.error("algo salio mal");
-      setError(true)
+    if (isDev) {
+      if (data.username === "test" && data.password === "test") {
+        const userData = {
+          userId: "1",
+          username: "test",
+          email: "test@test.com",
+          company: "Company",
+          isAdmin: false,
+        };
+        const rawData = { access: "string", refresh: "string" };
+        setError(false);
+        setUser(userData);
+        setTokens(rawData);
+        setIsAuth(true);
+        navigate(RoutesDirectory.HOME);
+      } else {
+        console.error("algo salio mal");
+        setError(true);
+      }
     }
   });
 
@@ -72,10 +87,11 @@ export default function LogInForm() {
           register={register}
         />
       </div>
-      {
-        error&&
-        <p className="loginError">{"-> Contraseña o usuario no coincide, por favor verifique"}</p>
-      }
+      {error && (
+        <p className="loginError">
+          {"-> Contraseña o usuario no coincide, por favor verifique"}
+        </p>
+      )}
 
       <div className="forgotPassword">
         <Link to={"#"}>Olvidaste tu contrasenia..?</Link>

@@ -2,7 +2,33 @@
 import axios from "axios";
 import { TypeCotizacion } from "../Types/ProjectData";
 
-const baseUrl = "https://www.server.iqea.me/estimador/api/";
+// const baseUrl = "https://www.server.iqea.me/estimador/api/";
+const baseUrl = "http://localhost:8000/estimador/api/";
+
+
+export const getAllSystems = async (token: string) => {
+  try {
+    axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+
+    const res = await axios.get(`${baseUrl}v1/system-categories/`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const getSystemDetail = async (token: string, id:number) => {
+  try {
+    axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+
+    const res = await axios.get(`${baseUrl}v1/precios-referencia/${id}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
 
 export const getAllUsersAdmin = async (token: string) => {
   try {
@@ -180,6 +206,7 @@ type NewUserType = {
     isAdmin: boolean;
   };
 };
+
 export const setRegisterServer = async (newUserData: NewUserType) => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");

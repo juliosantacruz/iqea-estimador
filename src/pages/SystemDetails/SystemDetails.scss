@@ -1,0 +1,40 @@
+.systemDetail{
+
+
+
+
+
+  .system_data{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .system_table{
+      width: 60%;
+      margin: 0 auto;
+
+      table{
+        width: 100%;
+        text-align: center;
+
+
+        tr{
+          .notes{
+            width: 20%;
+          }
+          .actions{
+            width: 15%;
+
+            button{
+              margin: 0 5px;
+            }
+          }
+        }
+      }
+    }
+
+    .system_chart{
+      width: 40%;
+    }
+  }
+}

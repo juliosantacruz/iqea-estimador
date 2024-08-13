@@ -22,3 +22,9 @@ export interface TypeCotizacion {
   waste_water_cotizacion?: PriceValue[]|[];
   reuso_cotizacion?: PriceValue[]|[];
 }
+
+
+
+
+
+

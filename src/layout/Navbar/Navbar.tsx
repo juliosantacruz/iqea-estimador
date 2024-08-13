@@ -1,6 +1,6 @@
 import "./Navbar.scss";
 import logo from "../../assets/iqea_logo.png";
-import UserImg from "../../assets/bx-user-circle.svg";
+// import UserImg from "../../assets/bx-user-circle.svg";
 import LogOutBtn from "../../components/LogOutBtn/LogOutBtn";
 import { Link } from "react-router-dom";
 import { RoutesDirectory } from "../../routes/RoutesDirectory";
@@ -24,7 +24,7 @@ export default function Navbar() {
             </a> */}
             {
               user?.isAdmin&&
-             <li>
+            <li>
               <Link to={RoutesDirectory.DASHBOARD} >Dashboard</Link>
             </li>
 
@@ -33,13 +33,16 @@ export default function Navbar() {
               <Link to={RoutesDirectory.PERFIL} >Perfil</Link>
             </li>
             <li>
-              <LogOutBtn />
+              <Link to={RoutesDirectory.CONFIG} >Configuracion</Link>
             </li>
             <li>
+              <LogOutBtn />
+            </li>
+            {/* <li>
               <div className="dev-logo">
                 <img src={UserImg} alt="logoDev" />
               </div>
-            </li>
+            </li> */}
           </ul>
         </div>
       </nav>
