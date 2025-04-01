@@ -19,10 +19,10 @@ const AppRoutes = () => {
     { path: RoutesDirectory.LOG_IN, element: <LogIn /> },
     { path: RoutesDirectory.SIGN_IN, element: <Register /> },
 
+    { path: RoutesDirectory.HOME, element: <Inicio />, errorElement:<ErrorPage/> },
+    { path: RoutesDirectory.DETAILS, element: <Details/>},
     { element: <ProtectedRoute isAllowed={false} />, children:[
-      { path: RoutesDirectory.HOME, element: <Inicio />, errorElement:<ErrorPage/> },
-      { path: RoutesDirectory.DETAILS, element: <Details/>},
-      { path: RoutesDirectory.DASHBOARD, element: <Dashboard />, errorElement:<ErrorPage/> },
+    { path: RoutesDirectory.DASHBOARD, element: <Dashboard />, errorElement:<ErrorPage/> },
       { path: RoutesDirectory.PERFIL, element: <Perfil />, errorElement:<ErrorPage/> },
       { path: RoutesDirectory.CONFIG, element: <Configuracion />, errorElement:<ErrorPage/> },
       { path: RoutesDirectory.CONFIG_SYSTEM, element: <SystemDetails />, errorElement:<ErrorPage/> },

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./PreregistroForm.scss";
-
+const API_URL = import.meta.env.VITE_API_URL;
 const PreregistroForm = () => {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -19,7 +19,7 @@ const PreregistroForm = () => {
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:1337/api/registro-estimadors", {
+      const response = await axios.post(`${API_URL}/registro-estimadors`, {
         data: formData
       });
       alert("Registro exitoso!");
