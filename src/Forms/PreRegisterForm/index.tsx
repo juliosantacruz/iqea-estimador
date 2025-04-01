@@ -19,7 +19,7 @@ const PreregistroForm = () => {
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
-      postProjectForm(formData);
+      await postProjectForm(formData);
       alert("Registro exitoso!");
       setFormData({ nombre: "", empresa: "", correo: "", telefono: "", perfil: "", puesto: "" });
     } catch (error) {
