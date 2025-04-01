@@ -39,8 +39,8 @@ export default function CardCotizacionElement({ data }: CardProps) {
       <div className="listContent">
         <div className="listHeader">
           <h3>{project_data?.name?.toUpperCase()}</h3>
-          <p className="date">Fecha de creacion: {' '} <span>12-02-2024</span> </p>
-          <p className="date">Ubicacion de proyecto: {" "}<span>Sonora</span> </p>
+          <p className="date">Fecha de creacion: {' '} <span>{project_data?.date}</span> </p>
+          <p className="date">Ubicacion de proyecto: {" "}<span>{project_data?.location}</span> </p>
 
         </div>
         <div className="listFooter">
@@ -51,7 +51,7 @@ export default function CardCotizacionElement({ data }: CardProps) {
                 return (
                   <li
                     key={element.id}
-                    style={{ backgroundColor: "rgb(160, 0, 147)" }}
+                    style={{color:'white', backgroundColor: "rgb(160, 0, 147)" }}
                   >
                     {element.system}
                   </li>
@@ -62,7 +62,7 @@ export default function CardCotizacionElement({ data }: CardProps) {
                 return (
                   <li
                     key={element.id}
-                    style={{ backgroundColor: "rgb(83, 0, 160)" }}
+                    style={{color:'white', backgroundColor: "rgb(83, 0, 160)" }}
                   >
                     {element.system}
                   </li>
@@ -73,7 +73,7 @@ export default function CardCotizacionElement({ data }: CardProps) {
                 return (
                   <li
                     key={element.id}
-                    style={{ backgroundColor: "rgb(48, 0, 160)" }}
+                    style={{color:'white', backgroundColor: "rgb(48, 0, 160)" }}
                   >
                     {element.system}
                   </li>

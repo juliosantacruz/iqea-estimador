@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { RoutesDirectory } from "../../routes/RoutesDirectory";
 // import LogOutBtn from "@/components/LogOutBtn/LogOutBtn";
 import {useUserStore}from "../../store/userStore"
+import ClientModalTrigger from "../../components/ModalBox/ClientModalTrigger";
 
 export default function Navbar() {
   const {user} = useUserStore()
@@ -35,8 +36,9 @@ export default function Navbar() {
             <li>
               <Link to={RoutesDirectory.CONFIG} >Configuracion</Link>
             </li>
-            <li>
-              <LogOutBtn />
+            <li style={{marginRight:"1rem"}}>
+              {/* <LogOutBtn /> */}
+              <ClientModalTrigger label="Registrate aqui..!" data={null} />
             </li>
             {/* <li>
               <div className="dev-logo">

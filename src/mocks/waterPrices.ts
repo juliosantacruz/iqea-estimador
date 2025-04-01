@@ -6,7 +6,7 @@ for (let index = 0; index < 50; index++) {
     // id:'',
     flow: 5 + index,
     unit: "m3/d",
-    price: 13000 + index * 1000,
+    price: 1300 + index * 100,
     currency: "USD",
     // system:''
   };
@@ -20,7 +20,7 @@ for (let index = 0; index < 50; index++) {
     // id: '',
     flow: 5 + index,
     unit: "m3/d",
-    price: 8000 + index * 1000,
+    price: 800 + index * 100,
     currency: "USD",
     // system:''
 
@@ -35,7 +35,7 @@ for (let index = 0; index < 50; index++) {
     // id: '',
     flow: 5 + index,
     unit: "m3/d",
-    price: 8000 + index * 1000,
+    price: 800 + index * 100,
     currency: "USD",
     // system:''
 
@@ -49,7 +49,7 @@ for (let index = 0; index < 50; index++) {
     // id: '',
     flow: 5 + index,
     unit: "m3/d",
-    price: 8000 + index * 1000,
+    price: 800 + index * 100,
     currency: "USD",
     // system:''
 
@@ -63,7 +63,7 @@ for (let index = 0; index < 50; index++) {
     // id: '',
     flow: 5 + index,
     unit: "m3/d",
-    price: 8000 + index * 1000,
+    price: 800 + index * 100,
     currency: "USD",
     // system:''
 
@@ -77,7 +77,7 @@ for (let index = 0; index < 50; index++) {
     // id: index,
     flow: 5 + index,
     unit: "m3/d",
-    price: 8000 + index * 1150,
+    price: 800 + index * 1150,
     currency: "USD",
   };
   bioFiltracion.push(newElement);
@@ -89,7 +89,7 @@ for (let index = 0; index < 50; index++) {
     // id: index,
     flow: 5 + index,
     unit: "m3/d",
-    price: 8000 + index * 900,
+    price: 800 + index * 900,
     currency: "USD",
   };
   mbbr.push(newElement);
@@ -113,7 +113,7 @@ for (let index = 0; index < 50; index++) {
     // id: index,
     flow: 5 + index,
     unit: "m3/d",
-    price: 1000 + index * 1000,
+    price: 100 + index * 100,
     currency: "USD",
   };
   ultrafiltracion.push(newElement);

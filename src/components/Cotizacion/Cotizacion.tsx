@@ -12,7 +12,7 @@ import { setDateFormat } from "../../utils/DateFormat";
 
 export default function Cotizacion({ leData }: { leData: TypeCotizacion }) {
   const dateTest = setDateFormat(leData.created as string)
-  console.log(dateTest)
+  console.log(leData)
 
   const {
     project_data,
@@ -64,23 +64,23 @@ export default function Cotizacion({ leData }: { leData: TypeCotizacion }) {
           <div className="HeaderLogo">
             <img src={iqeaLogo} alt="logo" />
           </div>
-          {/* <div className="HeaderInfo">
-          <p>NORMA ALICIA MURILLO SOLIS</p>
+           <div className="HeaderInfo">
+          {/*<p>NORMA ALICIA MURILLO SOLIS</p>
           <p>RFC MUSN511021DU4</p>
           <p>
             CANTERA 400 Int.104, Playas de Tijuana Sección Monumental, Del.
             Tijuana
-          </p>
+          </p>*/}
           <p>Tijuana, Baja California, México CP: 22504</p>
-          <p>Lada 664 Tel(s) 210-1017</p>
-          <p>iqea.facturacion@gmail.com</p>
-        </div> */}
+          <p>Tel. 664 210-1017</p>
+          <p>ventas@iqea.mx</p>
+        </div>
           <div className="HeaderCotizacion">
             <h3>Estimacion de Costo</h3>
             <p>Folio: {project_data?.id}</p>
-            <p>Emitida</p>
-            <p className="headerInfo">Fecha de Creacion: </p>
-            <p className="headerData">{dateTest}</p>
+            <p>Estatus: <i><strong>Emitida</strong></i></p>
+            <p className="headerInfo">Fecha de Creacion: <i><strong>{project_data?.date}</strong></i> </p>
+            {/* <p className="headerData" style={{fontSize:'14px'}}>{project_data?.date}</p> */}
           </div>
         </div>
 
@@ -92,7 +92,7 @@ export default function Cotizacion({ leData }: { leData: TypeCotizacion }) {
             </div>
             <div className="row">
               <p className="rowTitle">Contacto:</p>
-              <p>USER NAME</p>
+              <p>Usuario</p>
             </div>
           </div>
 
