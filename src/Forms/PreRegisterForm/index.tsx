@@ -19,9 +19,10 @@ const PreregistroForm = () => {
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
-      await postProjectForm(formData);
+      const response =  await postProjectForm(formData);
       alert("Registro exitoso!");
       setFormData({ nombre: "", empresa: "", correo: "", telefono: "", perfil: "", puesto: "" });
+      console.log("Registro exitoso", response);
     } catch (error) {
       console.error("Error en el registro", error);
       alert("Error en el registro");
